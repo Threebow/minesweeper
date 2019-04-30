@@ -26,8 +26,8 @@ class Board extends JFrame {
 
 	//Returns a tile at a position if it exists
 	Tile getTile(int x, int y) {
-		if(x < 0 || x > w - 1) return null;
-		if(y < 0 || y > h - 1) return null;
+		if (x < 0 || x > w - 1) return null;
+		if (y < 0 || y > h - 1) return null;
 		return tiles[x][y];
 	}
 
@@ -49,7 +49,7 @@ class Board extends JFrame {
 		while (mines > 0) {
 			Tile tile = getTile(random.nextInt(w), random.nextInt(h));
 
-			if(!tile.mine) {
+			if (!tile.mine) {
 				tile.mine = true;
 				mines--;
 			}
@@ -63,7 +63,7 @@ class Board extends JFrame {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
-				if(tile.mine) System.out.print("M ");
+				if (tile.mine) System.out.print("M ");
 				else System.out.print(tile.getSurroundingMineCount() + " ");
 			}
 			System.out.println();

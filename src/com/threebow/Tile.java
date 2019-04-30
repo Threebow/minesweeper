@@ -44,13 +44,13 @@ class Tile extends JButton {
 		for (int lx = 0; lx < 3; lx++) {
 			for (int ly = 0; ly < 3; ly++) {
 				//Continue if it's the center of the 3x3 grid (this tile)
-				if(lx == 1 && ly == 1) continue;
+				if (lx == 1 && ly == 1) continue;
 
 				//Get the tile at this position in the 3x3 grid, relative to the current tile
 				Tile tile = board.getTile(x - 1 + lx, y - 1 + ly);
 
 				//Add it to the arraylist if it's in bounds and is a mine
-				if(tile != null && tile.mine) {
+				if (tile != null && tile.mine) {
 					adjacent.add(tile);
 				}
 			}
@@ -65,7 +65,7 @@ class Tile extends JButton {
 
 	int getSurroundingMineCount() {
 		//Cache the adjacent mines if we haven't already
-		if(surroundingMineCount == -1) {
+		if (surroundingMineCount == -1) {
 			getAdjacentMines();
 		}
 
