@@ -27,9 +27,13 @@ class Tile extends JButton {
 		setFont(new Font("Consolas", Font.PLAIN, 36));
 	}
 
-	public void expose() {
+	void expose() {
 		exposed = true;
 		setText(Integer.toString(getDisplayNumber()));
+	}
+
+	boolean isExposed() {
+		return exposed;
 	}
 
 	//Returns an arraylist of the tiles around this tile that have mines
