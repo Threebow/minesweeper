@@ -69,4 +69,13 @@ class Board extends JFrame {
 			System.out.println();
 		}
 	}
+
+	void exposeAllTiles() {
+		for (int y = 0; y < h; y++) {
+			for (int x = 0; x < w; x++) {
+				Tile tile = tiles[x][y];
+				tile.expose();
+			}
+		}
+	}
 }

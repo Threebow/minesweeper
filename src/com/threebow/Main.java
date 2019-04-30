@@ -1,7 +1,9 @@
 package com.threebow;
 
 public class Main {
+	static Game game;
+
 	public static void main(String[] args) {
-		new Game();
+		game = new Game();
 	}
 }
