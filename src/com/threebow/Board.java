@@ -13,7 +13,7 @@ class Board extends JFrame {
 	private int h;
 
 	//Creates a new board of a certain size
-	Board(int width, int height) {
+	Board(int height, int width) {
 		w = width;
 		h = height;
 
