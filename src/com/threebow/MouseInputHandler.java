@@ -8,7 +8,7 @@ public class MouseInputHandler implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		Tile tile = (Tile) e.getSource();
 		if(tile.mine) Main.game.end();
-		if(!tile.isExposed()) tile.expose();
+		tile.expose();
 	}
 
 	@Override

@@ -28,12 +28,9 @@ class Tile extends JButton {
 	}
 
 	void expose() {
+		if(exposed) return;
 		exposed = true;
 		setText(Integer.toString(getDisplayNumber()));
-	}
-
-	boolean isExposed() {
-		return exposed;
 	}
 
 	//Returns an arraylist of the tiles around this tile that have mines
