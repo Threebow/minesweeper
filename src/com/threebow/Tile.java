@@ -3,6 +3,9 @@ package com.threebow;
 import javax.swing.JButton;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 class Tile extends JButton {
 	private Board board;
@@ -28,13 +31,44 @@ class Tile extends JButton {
 	}
 
 	void expose() {
-		if(exposed) return;
+		if (exposed) return;
 		exposed = true;
 		setText(Integer.toString(getDisplayNumber()));
+
+		if (getSurroundingMineCount() == 0) {
+			//HashSet of our visited tiles
+			HashSet<Tile> visited = new HashSet<>();
+
+			//Create a queue for BFS
+			LinkedList<Tile> queue = new LinkedList<>();
+
+			//Keep the tile that we are processing in the BFS queue
+			Tile tile = this;
+
+			//Mark the current node as visited and enqueue it
+			visited.add(tile);
+			queue.add(tile);
+
+			while (queue.size() != 0) {
+				//Dequeue a pos from queue and print it
+				tile = queue.poll();
+
+				//Get all adjacent positions of the dequeued position
+				//If a adjacent has not been visited, then mark it
+				//visited and enqueue it
+				for (Tile next : tile.getAdjacentTiles()) {
+					if (!visited.contains(next) && !next.mine) {
+						visited.add(next);
+						queue.add(next);
+						next.expose();
+					}
+				}
+			}
+		}
 	}
 
 	//Returns an arraylist of the tiles around this tile that have mines
-	ArrayList<Tile> getAdjacentMines() {
+	ArrayList<Tile> getAdjacentTiles() {
 		ArrayList<Tile> adjacent = new ArrayList<>();
 
 		//Go through a 3x3 grid
@@ -47,16 +81,20 @@ class Tile extends JButton {
 				Tile tile = board.getTile(x - 1 + lx, y - 1 + ly);
 
 				//Add it to the arraylist if it's in bounds and is a mine
-				if (tile != null && tile.mine) {
+				if (tile != null) {
 					adjacent.add(tile);
 				}
 			}
 		}
 
-		//Cache the count
-		surroundingMineCount = adjacent.size();
-
 		//Return the list of adjacent mines
+		return adjacent;
+	}
+
+	//Returns an arraylist of the tiles around this tile that have mines
+	private ArrayList<Tile> getAdjacentMines() {
+		ArrayList<Tile> adjacent = getAdjacentTiles().stream().filter(t -> t.mine).collect(Collectors.toCollection(ArrayList::new));
+		surroundingMineCount = adjacent.size();
 		return adjacent;
 	}
 
