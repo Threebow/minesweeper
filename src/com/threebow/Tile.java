@@ -3,8 +3,6 @@ package com.threebow;
 import javax.swing.JButton;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 class Tile extends JButton {
@@ -19,22 +17,39 @@ class Tile extends JButton {
 	private int x;
 	private int y;
 
+	//Pixel size of this tile
+	private int w;
+	private int h;
+
 	//Constructor, sets the parent board and the tile's position in it
-	Tile(Board parent, int posX, int posY) {
+	Tile(Board parent, int posX, int posY, int sizeW, int sizeH) {
 		board = parent;
 		x = posX;
 		y = posY;
+		w = sizeW;
+		h = sizeH;
 
 		handler = new MouseInputHandler();
 		addMouseListener(handler);
 		setFont(new Font("Consolas", Font.PLAIN, 36));
+		setIcon(Resources.scaleIcon(Resources.TILE, w, h));
 	}
 
 	void expose() {
 		if(exposed) return;
-
 		exposed = true;
-		setText(Integer.toString(getDisplayNumber()));
+
+		if(mine) {
+			setIcon(Resources.scaleIcon(Resources.MINE, w, h));
+			Main.game.end();
+			return;
+		} else {
+			setIcon(null);
+			setText(Integer.toString(getDisplayNumber()));
+		}
+
+		board.uncovered++;
+		board.checkWin();
 
 		if(getSurroundingMineCount() == 0) {
 			ArrayList<Tile> tiles = getAdjacentTiles();
@@ -82,6 +97,10 @@ class Tile extends JButton {
 		}
 
 		return surroundingMineCount;
+	}
+
+	void flag() {
+		setIcon(Resources.scaleIcon(Resources.FLAG, w, h));
 	}
 
 	private int getDisplayNumber() {
