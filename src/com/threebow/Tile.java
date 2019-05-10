@@ -10,6 +10,7 @@ class Tile extends JButton {
 	private MouseInputHandler handler;
 
 	boolean mine = false;
+	boolean flagged = false;
 	private boolean exposed = false;
 	private int surroundingMineCount = -1;
 
@@ -36,7 +37,7 @@ class Tile extends JButton {
 	}
 
 	void expose() {
-		if(exposed) return;
+		if(exposed || flagged) return;
 		exposed = true;
 
 		if(mine) {
@@ -97,6 +98,12 @@ class Tile extends JButton {
 		}
 
 		return surroundingMineCount;
+	}
+
+	void toggleFlag() {
+		if(exposed) return;
+		flagged = !flagged;
+		setIcon(Resources.scaleIcon(flagged ? Resources.FLAG : Resources.TILE, w, h));
 	}
 
 	void flag() {
