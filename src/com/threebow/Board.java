@@ -68,7 +68,7 @@ class Board extends JFrame {
 		setVisible(true);
 	}
 
-	int getTileCount() {
+	private int getTileCount() {
 		return w * h;
 	}
 
