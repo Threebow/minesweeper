@@ -7,7 +7,11 @@ public class MouseInputHandler implements MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Tile tile = (Tile) e.getSource();
-		tile.expose();
+		if(e.isMetaDown()) {
+			tile.toggleFlag();
+		} else if(!tile.flagged) {
+			tile.expose();
+		}
 	}
 
 	@Override
