@@ -15,6 +15,6 @@ class Game {
 	}
 
 	void end() {
-		board.exposeAllTiles();
+		board.exposeAllMines();
 	}
 }

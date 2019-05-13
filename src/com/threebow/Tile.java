@@ -37,12 +37,16 @@ class Tile extends JButton {
 	}
 
 	void expose() {
+		expose(true);
+	}
+
+	void expose(boolean end) {
 		if(exposed || flagged) return;
 		exposed = true;
 
 		if(mine) {
 			setIcon(Resources.scaleIcon(Resources.MINE, w, h));
-			Main.game.end();
+			if(end) Main.game.end();
 			return;
 		} else {
 			setIcon(null);

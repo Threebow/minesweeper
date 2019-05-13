@@ -83,11 +83,11 @@ class Board extends JFrame {
 		}
 	}
 
-	void exposeAllTiles() {
+	void exposeAllMines() {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
-				tile.expose();
+				if(tile.mine) tile.expose(false);
 			}
 		}
 	}
