@@ -46,11 +46,12 @@ class Board extends JFrame {
 		return tiles[x][y];
 	}
 
+	//Allows us to generate directly from a difficulty, bit more convenient
 	void generate(Difficulty difficulty) {
 		generate(difficulty.rows, difficulty.columns, difficulty.mines);
 	}
 
-	//Generates the board randomly
+	//Generates the board
 	void generate(int width, int height, int mineCount) {
 		//Set the width and height and mines, they are swapped here for ease of looping.
 		w = width;
@@ -90,26 +91,18 @@ class Board extends JFrame {
 		setVisible(true);
 	}
 
+	//Gets rid of all the tile buttons
 	void clear() {
 		main.removeAll();
 		main.repaint();
 	}
 
+	//Returns the area of the grid
 	private int getTileCount() {
 		return w * h;
 	}
 
-	void printGrid() {
-		for (int y = 0; y < h; y++) {
-			for (int x = 0; x < w; x++) {
-				Tile tile = tiles[x][y];
-				if (tile.mine) System.out.print("M ");
-				else System.out.print(tile.getSurroundingMineCount() + " ");
-			}
-			System.out.println();
-		}
-	}
-
+	//Exposes every mine on the board
 	void exposeAllMines() {
 		for (int y = 0; y < h; y++) {
 			for (int x = 0; x < w; x++) {
@@ -119,6 +112,7 @@ class Board extends JFrame {
 		}
 	}
 
+	//Checks if every tile except the mines have been uncovered and flags all of them otherwise
 	void checkWin() {
 		if(uncovered == getTileCount() - mines) {
 			for (int y = 0; y < h; y++) {

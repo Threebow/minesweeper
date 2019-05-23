@@ -1,6 +1,7 @@
 package com.threebow;
 
 class Difficulty {
+	//Difficulty details
 	String name;
 	int rows;
 	int columns;
