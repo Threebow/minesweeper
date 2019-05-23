@@ -1,13 +1,14 @@
 package com.threebow;
 
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 class Tile extends JButton {
+	static final int SIZE = 48;
+
 	private Board board;
-	private MouseInputHandler handler;
 
 	boolean mine = false;
 	boolean flagged = false;
@@ -18,22 +19,21 @@ class Tile extends JButton {
 	private int x;
 	private int y;
 
-	//Pixel size of this tile
-	private int w;
-	private int h;
-
 	//Constructor, sets the parent board and the tile's position in it
-	Tile(Board parent, int posX, int posY, int sizeW, int sizeH) {
+	Tile(Board parent, int posX, int posY) {
 		board = parent;
 		x = posX;
 		y = posY;
-		w = sizeW;
-		h = sizeH;
 
-		handler = new MouseInputHandler();
-		addMouseListener(handler);
-		setFont(new Font("Consolas", Font.PLAIN, 36));
-		setIcon(Resources.scaleIcon(Resources.TILE, w, h));
+		//Set this button up
+		addMouseListener(new MouseInputHandler());
+		setFont(new Font("Consolas", Font.PLAIN, SIZE / 2));
+		setMargin(new Insets(0, 0, 0, 0));
+		setScaledIcon(Resources.TILE);
+	}
+
+	private void setScaledIcon(ImageIcon icon) {
+		setIcon(Resources.scaleIcon(icon, SIZE, SIZE));
 	}
 
 	void expose() {
@@ -45,7 +45,7 @@ class Tile extends JButton {
 		exposed = true;
 
 		if(mine) {
-			setIcon(Resources.scaleIcon(Resources.MINE, w, h));
+			setScaledIcon(Resources.MINE);
 			if(end) Main.game.end();
 			return;
 		} else {
@@ -107,11 +107,11 @@ class Tile extends JButton {
 	void toggleFlag() {
 		if(exposed) return;
 		flagged = !flagged;
-		setIcon(Resources.scaleIcon(flagged ? Resources.FLAG : Resources.TILE, w, h));
+		setScaledIcon(flagged ? Resources.FLAG : Resources.TILE);
 	}
 
 	void flag() {
-		setIcon(Resources.scaleIcon(Resources.FLAG, w, h));
+		setScaledIcon(Resources.FLAG);
 	}
 
 	private int getDisplayNumber() {
