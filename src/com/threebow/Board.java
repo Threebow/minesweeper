@@ -63,6 +63,9 @@ class Board extends JFrame {
 		main.setPreferredSize(new Dimension(h*Tile.SIZE, w*Tile.SIZE));
 		pack();
 
+		//Center the panel on the screen
+		setLocationRelativeTo(null);
+
 		//Initializes an empty two-dimensional array of tiles with the size of the board
 		tiles = new Tile[w][h];
 
