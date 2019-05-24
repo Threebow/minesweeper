@@ -10,7 +10,7 @@ class Resources {
 	static ImageIcon FLAG = scaledIcon("resource/Flag.png");
 
 	//Scale an ImageIcon to a new size
-	static ImageIcon scaledIcon(String iconPath) {
+	private static ImageIcon scaledIcon(String iconPath) {
 		Image img = new ImageIcon(iconPath).getImage();
 		return new ImageIcon(img.getScaledInstance(Tile.SIZE, Tile.SIZE, Image.SCALE_SMOOTH));
 	}
