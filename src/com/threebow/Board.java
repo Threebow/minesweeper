@@ -12,7 +12,7 @@ class Board extends JFrame {
 	private int w;
 	private int h;
 
-	//Toolbar
+	//UI
 	private JPanel main;
 
 	//How many mines are on this board
