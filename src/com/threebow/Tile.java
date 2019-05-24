@@ -62,7 +62,7 @@ class Tile extends JButton {
 		//Uncover adjacent zeroes
 		if(getSurroundingMineCount() == 0) {
 			ArrayList<Tile> tiles = getAdjacentTiles();
-			for (Tile tile : tiles) {
+			for(Tile tile : tiles) {
 				tile.expose();
 			}
 		}
@@ -73,8 +73,8 @@ class Tile extends JButton {
 		ArrayList<Tile> adjacent = new ArrayList<>();
 
 		//Go through a 3x3 grid
-		for (int lx = 0; lx < 3; lx++) {
-			for (int ly = 0; ly < 3; ly++) {
+		for(int lx = 0; lx < 3; lx++) {
+			for(int ly = 0; ly < 3; ly++) {
 				//Continue if it's the center of the 3x3 grid (this tile)
 				if(lx == 1 && ly == 1) continue;
 

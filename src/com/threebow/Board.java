@@ -75,8 +75,8 @@ class Board extends JFrame {
 		Dimension boardSize = getPreferredSize();
 
 		//Goes through the board and generates a new tile for each one
-		for (int x = 0; x < w; x++) {
-			for (int y = 0; y < h; y++) {
+		for(int x = 0; x < w; x++) {
+			for(int y = 0; y < h; y++) {
 				Tile tile = new Tile(this, x, y);
 				main.add(tile);
 				tiles[x][y] = tile;
@@ -84,7 +84,7 @@ class Board extends JFrame {
 		}
 
 		//Adds the specified amount of mines to the board, picking them at random
-		while (mineCount > 0) {
+		while(mineCount > 0) {
 			Tile tile = getTile(random.nextInt(w), random.nextInt(h));
 
 			if(!tile.mine) {
@@ -109,8 +109,8 @@ class Board extends JFrame {
 
 	//Exposes every mine on the board
 	void exposeAllMines() {
-		for (int y = 0; y < h; y++) {
-			for (int x = 0; x < w; x++) {
+		for(int y = 0; y < h; y++) {
+			for(int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
 				if(tile.mine) tile.expose(false);
 			}
@@ -120,8 +120,8 @@ class Board extends JFrame {
 	//Checks if every tile except the mines have been uncovered and flags all of them otherwise
 	void checkWin() {
 		if(uncovered == getTileCount() - mines) {
-			for (int y = 0; y < h; y++) {
-				for (int x = 0; x < w; x++) {
+			for(int y = 0; y < h; y++) {
+				for(int x = 0; x < w; x++) {
 					Tile tile = tiles[x][y];
 					if(tile.mine) {
 						tile.flag();
