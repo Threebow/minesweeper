@@ -71,9 +71,6 @@ class Board extends JFrame {
 		//Initializes an empty two-dimensional array of tiles with the size of the board
 		tiles = new Tile[w][h];
 
-		//Get the pixel dimensions
-		Dimension boardSize = getPreferredSize();
-
 		//Goes through the board and generates a new tile for each one
 		for(int x = 0; x < w; x++) {
 			for(int y = 0; y < h; y++) {
@@ -109,10 +106,16 @@ class Board extends JFrame {
 
 	//Exposes every mine on the board
 	void exposeAllMines() {
+		System.out.println("Perhaps");
+
 		for(int y = 0; y < h; y++) {
 			for(int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
-				if(tile.mine) tile.expose(false);
+				if(tile.mine) {
+					tile.expose(false);
+				} else {
+					tile.setEnabled(false);
+				}
 			}
 		}
 	}
