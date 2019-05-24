@@ -16,8 +16,8 @@ class Board extends JFrame {
 	private JPanel main;
 
 	//How many mines are on this board
-	int mines;
-	int uncovered = 0;
+	private int mines;
+	int uncovered;
 
 	//Creates a new board of a certain size
 	Board() {
@@ -42,8 +42,8 @@ class Board extends JFrame {
 
 	//Returns a tile at a position if it exists
 	Tile getTile(int x, int y) {
-		if (x < 0 || x > w - 1) return null;
-		if (y < 0 || y > h - 1) return null;
+		if(x < 0 || x > w - 1) return null;
+		if(y < 0 || y > h - 1) return null;
 		return tiles[x][y];
 	}
 
@@ -58,10 +58,11 @@ class Board extends JFrame {
 		w = width;
 		h = height;
 		mines = mineCount;
+		uncovered = 0;
 
 		//Set the main panel size, dimension here needs to reverse because we loop the other way everywhere
 		main.setLayout(new GridLayout(w, h));
-		main.setPreferredSize(new Dimension(h*Tile.SIZE, w*Tile.SIZE));
+		main.setPreferredSize(new Dimension(h * Tile.SIZE, w * Tile.SIZE));
 		pack();
 
 		//Center the panel on the screen
@@ -83,12 +84,12 @@ class Board extends JFrame {
 		}
 
 		//Adds the specified amount of mines to the board, picking them at random
-		while (mines > 0) {
+		while (mineCount > 0) {
 			Tile tile = getTile(random.nextInt(w), random.nextInt(h));
 
-			if (!tile.mine) {
+			if(!tile.mine) {
 				tile.mine = true;
-				mines--;
+				mineCount--;
 			}
 		}
 
