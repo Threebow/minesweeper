@@ -53,7 +53,7 @@ class Board extends JFrame {
 	}
 
 	//Generates the board
-	void generate(int width, int height, int mineCount) {
+	private void generate(int width, int height, int mineCount) {
 		//Set the width and height and mines, they are swapped here for ease of looping.
 		w = width;
 		h = height;
