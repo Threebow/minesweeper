@@ -25,6 +25,7 @@ class Board extends JFrame {
 		setDefaultLookAndFeelDecorated(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		setTitle("Minesweeper");
 
 		//Use a box layout so we can put a toolbar on top
 		Container contentPane = getContentPane();
