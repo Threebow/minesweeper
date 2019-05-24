@@ -32,12 +32,7 @@ class Tile extends JButton {
 		addMouseListener(new MouseInputHandler());
 		setFont(new Font("Consolas", Font.PLAIN, SIZE / 2));
 		setMargin(new Insets(0, 0, 0, 0));
-		setScaledIcon(Resources.TILE);
-	}
-
-	//Scales the given icon to this tile's size
-	private void setScaledIcon(ImageIcon icon) {
-		setIcon(Resources.scaleIcon(icon, SIZE, SIZE));
+		setIcon(Resources.TILE);
 	}
 
 	void expose() {
@@ -51,7 +46,7 @@ class Tile extends JButton {
 
 		if(mine) {
 			//Set the icon to a mine and end the game if we click on a mine
-			setScaledIcon(Resources.MINE);
+			setIcon(Resources.MINE);
 			if(end) Main.game.end();
 			return;
 		} else {
@@ -117,12 +112,12 @@ class Tile extends JButton {
 	void toggleFlag() {
 		if(exposed) return;
 		flagged = !flagged;
-		setScaledIcon(flagged ? Resources.FLAG : Resources.TILE);
+		setIcon(flagged ? Resources.FLAG : Resources.TILE);
 	}
 
 	//Set the icon to be flagged
 	void flag() {
-		setScaledIcon(Resources.FLAG);
+		setIcon(Resources.FLAG);
 	}
 
 	//Get the number that will be displayed here
