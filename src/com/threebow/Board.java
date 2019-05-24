@@ -106,15 +106,11 @@ class Board extends JFrame {
 
 	//Exposes every mine on the board
 	void exposeAllMines() {
-		System.out.println("Perhaps");
-
 		for(int y = 0; y < h; y++) {
 			for(int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
 				if(tile.mine) {
 					tile.expose(false);
-				} else {
-					tile.setEnabled(false);
 				}
 			}
 		}
