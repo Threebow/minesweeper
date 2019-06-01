@@ -33,6 +33,9 @@ class Tile extends JButton {
 		setFont(new Font("Consolas", Font.PLAIN, SIZE / 2));
 		setMargin(new Insets(0, 0, 0, 0));
 		setIcon(Resources.TILE);
+
+		setBackground(new Color(210, 210, 210));
+		setFocusPainted(false);
 	}
 
 	void expose() {
@@ -52,7 +55,8 @@ class Tile extends JButton {
 		} else {
 			//Clear the icon and let the number show
 			setIcon(null);
-			setText(Integer.toString(getDisplayNumber()));
+			int display = getDisplayNumber();
+			setText(display > 0 ? Integer.toString(display) : "");
 		}
 
 		//Increment the uncovered amount of mines and check for a win
@@ -121,7 +125,7 @@ class Tile extends JButton {
 	}
 
 	//Get the number that will be displayed here
-	private int getDisplayNumber() {
+	int getDisplayNumber() {
 		return mine ? -1 : getSurroundingMineCount();
 	}
 }
