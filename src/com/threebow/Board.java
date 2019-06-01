@@ -90,6 +90,8 @@ class Board extends JFrame {
 			}
 		}
 
+		uncoverZero();
+
 		setVisible(true);
 	}
 
@@ -128,6 +130,19 @@ class Board extends JFrame {
 						tile.setEnabled(false);
 					}
 				}
+			}
+		}
+	}
+
+	private void uncoverZero() {
+		while(true) {
+			int x = random.nextInt(w);
+			int y = random.nextInt(h);
+
+			Tile tile = tiles[x][y];
+			if(tile.getDisplayNumber() == 0) {
+				tile.expose();
+				return;
 			}
 		}
 	}
