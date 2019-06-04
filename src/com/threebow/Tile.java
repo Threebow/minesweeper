@@ -10,7 +10,7 @@ class Tile extends JButton {
 	static final int SIZE = 48;
 
 	//Parent board
-	private Board board;
+	Board board;
 
 	//Tile info
 	boolean mine = false;
@@ -19,8 +19,8 @@ class Tile extends JButton {
 	private int surroundingMineCount = -1;
 
 	//Coordinates of this tile
-	private int x;
-	private int y;
+	int x;
+	int y;
 
 	//Constructor, sets the parent board and the tile's position in it
 	Tile(Board parent, int posX, int posY) {

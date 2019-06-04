@@ -8,10 +8,16 @@ class MouseInputHandler implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		//Get the tile
 		Tile tile = (Tile) e.getSource();
+
 		if(e.isMetaDown()) {
 			//Flag it if we're right-clicking
 			tile.toggleFlag();
 		} else if(!tile.flagged) {
+			//Generate the mines on this board
+			if(tile.board.isBuffered) {
+				tile.board.generateMines(tile);
+			}
+
 			//Otherwise, expose the tile
 			tile.expose();
 		}

@@ -19,6 +19,9 @@ class Board extends JFrame {
 	private int mines;
 	int uncovered;
 
+	//Is the board prepared for a zero to be uncovered
+	boolean isBuffered;
+
 	//Creates a new board of a certain size
 	Board() {
 		//Set JFrame options
@@ -57,7 +60,6 @@ class Board extends JFrame {
 		//Set the width and height and mines, they are swapped here for ease of looping.
 		w = width;
 		h = height;
-		mines = mineCount;
 		uncovered = 0;
 
 		//Set the main panel size, dimension here needs to reverse because we loop the other way everywhere
@@ -80,19 +82,39 @@ class Board extends JFrame {
 			}
 		}
 
+		//Set mine data
+		isBuffered = true;
+		mines = mineCount;
+
+		setVisible(true);
+	}
+
+	void generateMines(Tile clicked) {
+		int mineCount = mines;
+
 		//Adds the specified amount of mines to the board, picking them at random
 		while(mineCount > 0) {
-			Tile tile = getTile(random.nextInt(w), random.nextInt(h));
+			//Generate a random position
+			int x = random.nextInt(w);
+			int y = random.nextInt(h);
 
+			//If it's within the clicked tile's radius then skip over this position
+			if(clicked.x >= x - 1 && clicked.x <= x + 1
+				&& clicked.y >= y - 1 && clicked.y <= y + 1) {
+				continue;
+			}
+
+			//Get the tile at this position
+			Tile tile = getTile(x, y);
+
+			//Turn it into a tile if it isnt already
 			if(!tile.mine) {
 				tile.mine = true;
 				mineCount--;
 			}
 		}
 
-		uncoverZero();
-
-		setVisible(true);
+		isBuffered = false;
 	}
 
 	//Gets rid of all the tile buttons
@@ -130,19 +152,6 @@ class Board extends JFrame {
 						tile.setEnabled(false);
 					}
 				}
-			}
-		}
-	}
-
-	private void uncoverZero() {
-		while(true) {
-			int x = random.nextInt(w);
-			int y = random.nextInt(h);
-
-			Tile tile = tiles[x][y];
-			if(tile.getDisplayNumber() == 0) {
-				tile.expose();
-				return;
 			}
 		}
 	}
