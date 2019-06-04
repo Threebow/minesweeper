@@ -8,8 +8,7 @@ class Game {
 	static final Difficulty[] DIFFICULTIES = {
 		new Difficulty("Beginner", 8, 8, 10),
 		new Difficulty("Intermediate", 16, 16, 40),
-		new Difficulty("Expert", 16, 30, 99),
-		new Difficulty("Testing", 5, 5, 2)
+		new Difficulty("Expert", 16, 30, 99)
 	};
 
 	Game() {
