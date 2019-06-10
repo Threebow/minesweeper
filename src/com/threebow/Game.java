@@ -20,5 +20,6 @@ class Game {
 	//End the game by exposing all the mines
 	void end() {
 		board.exposeAllMines();
+		board.gameOver = true;
 	}
 }

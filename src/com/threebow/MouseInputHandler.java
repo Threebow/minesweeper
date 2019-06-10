@@ -9,6 +9,9 @@ class MouseInputHandler implements MouseListener {
 		//Get the tile
 		Tile tile = (Tile) e.getSource();
 
+		//Don't allow clicking anything if the game is over
+		if(tile.board.gameOver) return;
+
 		if(e.isMetaDown()) {
 			//Flag it if we're right-clicking
 			tile.toggleFlag();
@@ -19,7 +22,11 @@ class MouseInputHandler implements MouseListener {
 			}
 
 			//Otherwise, expose the tile
-			tile.expose();
+			if(tile.mine) {
+				Main.game.end();
+			} else {
+				tile.expose();
+			}
 		}
 	}
 

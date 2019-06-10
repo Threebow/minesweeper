@@ -22,6 +22,9 @@ class Board extends JFrame {
 	//Is the board prepared for a zero to be uncovered
 	boolean isBuffered;
 
+	//Has the game ended
+	boolean gameOver;
+
 	//Creates a new board of a certain size
 	Board() {
 		//Set JFrame options
@@ -134,7 +137,7 @@ class Board extends JFrame {
 			for(int x = 0; x < w; x++) {
 				Tile tile = tiles[x][y];
 				if(tile.mine) {
-					tile.expose(false);
+					tile.setIcon(Resources.MINE);
 				}
 			}
 		}

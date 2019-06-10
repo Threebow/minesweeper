@@ -39,25 +39,14 @@ class Tile extends JButton {
 	}
 
 	void expose() {
-		expose(true);
-	}
-
-	void expose(boolean end) {
 		//Don't expose the tile if it's already flagged or exposed
 		if(exposed || flagged) return;
 		exposed = true;
 
-		if(mine) {
-			//Set the icon to a mine and end the game if we click on a mine
-			setIcon(Resources.MINE);
-			if(end) Main.game.end();
-			return;
-		} else {
-			//Clear the icon and let the number show
-			setIcon(null);
-			int display = getDisplayNumber();
-			setText(display > 0 ? Integer.toString(display) : "");
-		}
+		//Clear the icon and let the number show
+		setIcon(null);
+		int display = getDisplayNumber();
+		setText(display > 0 ? Integer.toString(display) : "");
 
 		//Increment the uncovered amount of mines and check for a win
 		board.uncovered++;
@@ -73,7 +62,7 @@ class Tile extends JButton {
 	}
 
 	//Returns an arraylist of the tiles around this tile that have mines
-	ArrayList<Tile> getAdjacentTiles() {
+	private ArrayList<Tile> getAdjacentTiles() {
 		ArrayList<Tile> adjacent = new ArrayList<>();
 
 		//Go through a 3x3 grid
@@ -125,7 +114,7 @@ class Tile extends JButton {
 	}
 
 	//Get the number that will be displayed here
-	int getDisplayNumber() {
+	private int getDisplayNumber() {
 		return mine ? -1 : getSurroundingMineCount();
 	}
 }
