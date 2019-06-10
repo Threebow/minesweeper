@@ -64,6 +64,7 @@ class Board extends JFrame {
 		w = width;
 		h = height;
 		uncovered = 0;
+		gameOver = false;
 
 		//Set the main panel size, dimension here needs to reverse because we loop the other way everywhere
 		main.setLayout(new GridLayout(w, h));
