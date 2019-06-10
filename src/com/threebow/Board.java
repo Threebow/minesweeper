@@ -14,10 +14,12 @@ class Board extends JFrame {
 
 	//UI
 	private JPanel main;
+	Toolbar toolbar;
 
 	//How many mines are on this board
-	private int mines;
+	int mines;
 	int uncovered;
+	int flagCount;
 
 	//Is the board prepared for a zero to be uncovered
 	boolean isBuffered;
@@ -38,7 +40,7 @@ class Board extends JFrame {
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
 		//Create the toolbar that we use
-		Toolbar toolbar = new Toolbar();
+		toolbar = new Toolbar();
 		add(toolbar);
 
 		//Actual layout for the game
@@ -64,6 +66,7 @@ class Board extends JFrame {
 		w = width;
 		h = height;
 		uncovered = 0;
+		flagCount = 0;
 		gameOver = false;
 
 		//Set the main panel size, dimension here needs to reverse because we loop the other way everywhere
@@ -89,6 +92,7 @@ class Board extends JFrame {
 		//Set mine data
 		isBuffered = true;
 		mines = mineCount;
+		toolbar.setMineCount(mines);
 
 		setVisible(true);
 	}
@@ -157,6 +161,8 @@ class Board extends JFrame {
 					}
 				}
 			}
+
+			flagCount = mines;
 		}
 	}
 }
