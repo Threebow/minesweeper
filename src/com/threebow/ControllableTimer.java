@@ -3,20 +3,17 @@ package com.threebow;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ControllableTimer {
+class ControllableTimer {
 	private Timer timer;
-	private TimerTask task;
 
-	void setTask(TimerTask task) {
-		this.task = task;
-	}
-
-	void start(int delay, int period) {
+	void start(TimerTask task, int delay, int period) {
 		timer = new Timer();
 		timer.schedule(task, delay, period);
 	}
 
 	void stop() {
+		System.out.println("STOP");
+
 		timer.cancel();
 		timer = null;
 	}

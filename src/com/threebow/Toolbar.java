@@ -15,7 +15,8 @@ class Toolbar extends JPanel {
 	private JButton reset;
 	private JLabel timeElapsed;
 	private int time;
-	boolean timerStarted;
+
+	ControllableTimer timer = new ControllableTimer();
 
 	Toolbar() {
 		//Don't need to set an actual width because boxlayout will scale this to the parent width
@@ -35,13 +36,11 @@ class Toolbar extends JPanel {
 		reset.addActionListener(e -> difficultyClicked(Game.board.difficulty));
 		add(reset);
 
-		//Elapsed time
+		//Elapsed time counter
 		timeElapsed = new JLabel("00:00");
 		timeElapsed.setHorizontalAlignment(JLabel.CENTER);
 		timeElapsed.setFont(new Font("Consolas", Font.PLAIN, 24));
 		add(timeElapsed);
-
-		initTimer();
 
 		//Populate the difficulty list at the top
 		for(Difficulty difficulty : Game.DIFFICULTIES) {
@@ -60,25 +59,22 @@ class Toolbar extends JPanel {
 		mineCount.setText(String.format("%03d", count));
 	}
 
-	void restartTimer() {
+	void resetTimer() {
 		time = 0;
-		timerStarted = true;
 		timeElapsed.setText("00:00");
 	}
 
-	private void initTimer() {
-		//Timer that runs every second, increments the seconds
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+	void startTimer() {
+		timer.start(getTask(), 1000, 1000);
+	}
+	private TimerTask getTask() {
+
+		return new TimerTask() {
 			@Override
 			public void run() {
-				System.out.println(timerStarted);
-				if(!timerStarted) return;
-
 				time++;
 				timeElapsed.setText(formatter.format(new Date(time * 1000)));
 			}
-		}, 1000, 1000);
-
+		};
 	}
 }

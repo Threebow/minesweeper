@@ -97,6 +97,7 @@ class Board extends JFrame {
 		isBuffered = true;
 		mines = mineCount;
 		toolbar.setMineCount(mines);
+		toolbar.resetTimer();
 
 		setVisible(true);
 	}
@@ -127,7 +128,7 @@ class Board extends JFrame {
 		}
 
 		isBuffered = false;
-		toolbar.restartTimer();
+		toolbar.startTimer();
 	}
 
 	//Gets rid of all the tile buttons
@@ -168,7 +169,7 @@ class Board extends JFrame {
 			}
 
 			flagCount = mines;
-			toolbar.timerStarted = false;
+			toolbar.timer.stop();
 		}
 	}
 }
