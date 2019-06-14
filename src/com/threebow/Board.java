@@ -27,6 +27,9 @@ class Board extends JFrame {
 	//Has the game ended
 	boolean gameOver;
 
+	//What difficulty is currently being ran
+	Difficulty difficulty;
+
 	//Creates a new board of a certain size
 	Board() {
 		//Set JFrame options
@@ -57,6 +60,7 @@ class Board extends JFrame {
 
 	//Allows us to generate directly from a difficulty, bit more convenient
 	void generate(Difficulty difficulty) {
+		this.difficulty = difficulty;
 		generate(difficulty.rows, difficulty.columns, difficulty.mines);
 	}
 
@@ -123,6 +127,7 @@ class Board extends JFrame {
 		}
 
 		isBuffered = false;
+		toolbar.restartTimer();
 	}
 
 	//Gets rid of all the tile buttons
@@ -163,6 +168,7 @@ class Board extends JFrame {
 			}
 
 			flagCount = mines;
+			toolbar.timerStarted = false;
 		}
 	}
 }
