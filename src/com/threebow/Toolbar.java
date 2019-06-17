@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Timer;
 import java.util.TimerTask;
 
 class Toolbar extends JPanel {
@@ -62,19 +61,17 @@ class Toolbar extends JPanel {
 	void resetTimer() {
 		time = 0;
 		timeElapsed.setText("00:00");
+
+		timer.stop();
 	}
 
 	void startTimer() {
-		timer.start(getTask(), 1000, 1000);
-	}
-	private TimerTask getTask() {
-
-		return new TimerTask() {
+		timer.start(new TimerTask() {
 			@Override
 			public void run() {
 				time++;
 				timeElapsed.setText(formatter.format(new Date(time * 1000)));
 			}
-		};
+		});
 	}
 }

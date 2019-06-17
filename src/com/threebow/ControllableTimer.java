@@ -6,15 +6,15 @@ import java.util.TimerTask;
 class ControllableTimer {
 	private Timer timer;
 
-	void start(TimerTask task, int delay, int period) {
+	void start(TimerTask task) {
 		timer = new Timer();
-		timer.schedule(task, delay, period);
+		timer.schedule(task, 1000, 1000);
 	}
 
 	void stop() {
-		System.out.println("STOP");
-
-		timer.cancel();
-		timer = null;
+		if(timer != null) {
+			timer.cancel();
+			timer = null;
+		}
 	}
 }
