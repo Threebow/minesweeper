@@ -12,11 +12,13 @@ class MouseInputHandler implements MouseListener {
 		//Don't allow clicking anything if the game is over
 		if(tile.board.gameOver) return;
 
-		if(e.isControlDown() && tile.exposed) {
+		if(tile.exposed) {
 			//Go through all adjacent tiles and try to expose them
 			for(Tile adj : tile.getAdjacentTiles()) {
-				if(!adj.flagged) {
+				if(e.isControlDown()) {
 					adj.tryExpose();
+				} else if(e.isShiftDown()) {
+					adj.toggleFlag();
 				}
 			}
 
@@ -26,7 +28,7 @@ class MouseInputHandler implements MouseListener {
 		if(e.isMetaDown()) {
 			//Flag it if we're right-clicking
 			tile.toggleFlag();
-		} else if(!tile.flagged) {
+		} else {
 			tile.tryExpose();
 		}
 	}

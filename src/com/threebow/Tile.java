@@ -39,6 +39,8 @@ class Tile extends JButton {
 	}
 
 	void tryExpose() {
+		if(flagged) return;
+
 		//Generate the mines on this board
 		if(board.isBuffered) {
 			board.generateMines(this);
