@@ -21,8 +21,15 @@ class Toolbar extends JPanel {
 		//Don't need to set an actual width because boxlayout will scale this to the parent width
 		setPreferredSize(new Dimension(0, HEIGHT));
 
+		//Margin
+		setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
 		//Use flowlayout because it's just one row
-		setLayout(new GridLayout(2, Game.DIFFICULTIES.length));
+
+		GridLayout layout = new GridLayout(2, Game.DIFFICULTIES.length);
+		layout.setHgap(5);
+		layout.setVgap(5);
+		setLayout(layout);
 
 		//Number of mines left
 		mineCount = new JLabel("000");
