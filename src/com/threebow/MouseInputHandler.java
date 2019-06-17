@@ -13,11 +13,13 @@ class MouseInputHandler implements MouseListener {
 		if(tile.board.gameOver) return;
 
 		if(e.isControlDown() && tile.exposed) {
+			//Go through all adjacent tiles and try to expose them
 			for(Tile adj : tile.getAdjacentTiles()) {
 				if(!adj.flagged) {
 					adj.tryExpose();
 				}
 			}
+
 			return;
 		}
 
