@@ -45,6 +45,7 @@ class Toolbar extends JPanel {
 		for(Difficulty difficulty : Game.DIFFICULTIES) {
 			JButton button = new JButton(difficulty.name);
 			button.addActionListener(e -> difficultyClicked(difficulty));
+			button.setBackground(difficulty.color);
 			add(button);
 		}
 	}

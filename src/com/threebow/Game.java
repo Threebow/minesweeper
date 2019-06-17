@@ -1,14 +1,16 @@
 package com.threebow;
 
+import java.awt.*;
+
 class Game {
 	//The reference to the game board
 	static Board board;
 
 	//List of difficulties
 	static final Difficulty[] DIFFICULTIES = {
-		new Difficulty("Beginner", 8, 8, 10),
-		new Difficulty("Intermediate", 16, 16, 40),
-		new Difficulty("Expert", 16, 30, 99)
+		new Difficulty("Beginner", 8, 8, 10, new Color(46, 204, 113)),
+		new Difficulty("Intermediate", 16, 16, 40, new Color(241, 196, 15)),
+		new Difficulty("Expert", 16, 30, 99, new Color(231, 76, 60))
 	};
 
 	Game() {
