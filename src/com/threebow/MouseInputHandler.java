@@ -15,7 +15,6 @@ class MouseInputHandler implements MouseListener {
 		if(e.isControlDown() && tile.exposed) {
 			for(Tile adj : tile.getAdjacentTiles()) {
 				if(!adj.flagged) {
-					System.out.println("try expose");
 					adj.tryExpose();
 				}
 			}
