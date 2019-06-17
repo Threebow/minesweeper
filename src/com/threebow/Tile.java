@@ -108,6 +108,10 @@ class Tile extends JButton {
 		return adjacent;
 	}
 
+	int getAdjacentFlagCount() {
+		return getAdjacentTiles().stream().filter(t -> t.flagged).collect(Collectors.toCollection(ArrayList::new)).size();
+	}
+
 	private int getSurroundingMineCount() {
 		//Cache the adjacent mines if we haven't already
 		if(surroundingMineCount == -1) {
@@ -143,7 +147,7 @@ class Tile extends JButton {
 	}
 
 	//Get the number that will be displayed here
-	private int getDisplayNumber() {
+	int getDisplayNumber() {
 		return mine ? -1 : getSurroundingMineCount();
 	}
 }
