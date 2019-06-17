@@ -12,21 +12,21 @@ class MouseInputHandler implements MouseListener {
 		//Don't allow clicking anything if the game is over
 		if(tile.board.gameOver) return;
 
+		if(e.isControlDown() && tile.exposed) {
+			for(Tile adj : tile.getAdjacentTiles()) {
+				if(!adj.flagged) {
+					System.out.println("try expose");
+					adj.tryExpose();
+				}
+			}
+			return;
+		}
+
 		if(e.isMetaDown()) {
 			//Flag it if we're right-clicking
 			tile.toggleFlag();
 		} else if(!tile.flagged) {
-			//Generate the mines on this board
-			if(tile.board.isBuffered) {
-				tile.board.generateMines(tile);
-			}
-
-			//Otherwise, expose the tile
-			if(tile.mine) {
-				Main.game.end();
-			} else {
-				tile.expose();
-			}
+			tile.tryExpose();
 		}
 	}
 

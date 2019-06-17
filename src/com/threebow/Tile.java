@@ -15,7 +15,7 @@ class Tile extends JButton {
 	//Tile info
 	boolean mine = false;
 	boolean flagged = false;
-	private boolean exposed = false;
+	boolean exposed = false;
 	private int surroundingMineCount = -1;
 
 	//Coordinates of this tile
@@ -38,7 +38,21 @@ class Tile extends JButton {
 		setFocusPainted(false);
 	}
 
-	void expose() {
+	void tryExpose() {
+		//Generate the mines on this board
+		if(board.isBuffered) {
+			board.generateMines(this);
+		}
+
+		//Otherwise, expose the tile
+		if(mine) {
+			Main.game.end();
+		} else {
+			expose();
+		}
+	}
+
+	private void expose() {
 		//Don't expose the tile if it's already flagged or exposed
 		if(exposed || flagged) return;
 		exposed = true;
@@ -62,7 +76,7 @@ class Tile extends JButton {
 	}
 
 	//Returns an arraylist of the tiles around this tile that have mines
-	private ArrayList<Tile> getAdjacentTiles() {
+	ArrayList<Tile> getAdjacentTiles() {
 		ArrayList<Tile> adjacent = new ArrayList<>();
 
 		//Go through a 3x3 grid
