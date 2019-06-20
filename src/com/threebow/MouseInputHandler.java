@@ -14,15 +14,23 @@ class MouseInputHandler implements MouseListener {
 
 		if(tile.exposed) {
 			//Go through all adjacent tiles
-			boolean canExpose = tile.getAdjacentFlagCount() == tile.getDisplayNumber();
+			int flags = tile.getAdjacentFlagCount();
+			boolean canExpose = flags == tile.getDisplayNumber();
+			int adjTileCount = tile.getUncoveredAdjacentTileCount();
 
 			for(Tile adj : tile.getAdjacentTiles()) {
 				if(e.isControlDown() && canExpose) {
 					//Expose if control is down
 					adj.tryExpose();
 				} else if(e.isShiftDown()) {
-					//Flag if shift is down
-					adj.toggleFlag();
+					//Flag the appropriate amount of mines
+					if(flags == 0) {
+						adj.setFlagged(true);
+					} else if(flags > 0 && flags < adjTileCount) {
+						adj.setFlagged(true);
+					} else {
+						adj.setFlagged(false);
+					}
 				}
 			}
 

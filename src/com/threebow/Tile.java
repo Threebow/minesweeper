@@ -112,6 +112,10 @@ class Tile extends JButton {
 		return getAdjacentTiles().stream().filter(t -> t.flagged).collect(Collectors.toCollection(ArrayList::new)).size();
 	}
 
+	int getUncoveredAdjacentTileCount() {
+		return getAdjacentTiles().stream().filter(t -> !t.exposed).collect(Collectors.toCollection(ArrayList::new)).size();
+	}
+
 	private int getSurroundingMineCount() {
 		//Cache the adjacent mines if we haven't already
 		if(surroundingMineCount == -1) {
@@ -121,9 +125,8 @@ class Tile extends JButton {
 		return surroundingMineCount;
 	}
 
-	//Toggle if this tile is flagged
-	void toggleFlag() {
-		if(exposed) return;
+	void setFlagged(boolean newState) {
+		if(exposed || newState == flagged) return;
 
 		//Update the flag count on the board
 		if(flagged) {
@@ -134,11 +137,16 @@ class Tile extends JButton {
 		}
 
 		//Toggle the flagged state
-		flagged = !flagged;
+		flagged = newState;
 
 		//Update the mine counter and the icon
 		board.toolbar.setMineCount(board.mines - board.flagCount);
 		setIcon(flagged ? Resources.FLAG : Resources.TILE);
+	}
+
+	//Toggle if this tile is flagged
+	void toggleFlag() {
+		setFlagged(!flagged);
 	}
 
 	//Set the icon to be flagged
