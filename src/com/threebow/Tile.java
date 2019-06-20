@@ -126,7 +126,7 @@ class Tile extends JButton {
 	}
 
 	void setFlagged(boolean newState) {
-		if(exposed || newState == flagged) return;
+		if(exposed || newState == flagged || board.isBuffered) return;
 
 		//Update the flag count on the board
 		if(flagged) {
