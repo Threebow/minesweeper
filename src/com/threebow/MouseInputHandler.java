@@ -12,7 +12,8 @@ class MouseInputHandler implements MouseListener {
 		//Don't allow clicking anything if the game is over
 		if(tile.board.gameOver) return;
 
-		if(tile.exposed) {
+		//Only allow shift and ctrl actions when the right mouse isn't down
+		if(tile.exposed && !e.isMetaDown()) {
 			//Go through all adjacent tiles
 			int flags = tile.getAdjacentFlagCount();
 			boolean canExpose = flags == tile.getDisplayNumber();
