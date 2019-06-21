@@ -162,12 +162,11 @@ class Board extends JFrame {
 					Tile tile = tiles[x][y];
 					if(tile.mine) {
 						tile.flag();
-					} else {
-						tile.setEnabled(false);
 					}
 				}
 			}
 
+			gameOver = true;
 			flagCount = mines;
 			toolbar.timer.stop();
 		}
