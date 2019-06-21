@@ -58,11 +58,27 @@ class MouseInputHandler implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		if(Game.board.gameOver) return;
 
+		Tile tile = (Tile) e.getSource();
+		if(tile.exposed) {
+			tile.setIcon(Resources.UNCOVERED_HOVERED);
+			return;
+		}
+
+		tile.setIcon(tile.isFlagged() ? Resources.FLAG_HOVERED : Resources.HOVERED);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		if(Game.board.gameOver) return;
 
+		Tile tile = (Tile) e.getSource();
+		if(tile.exposed) {
+			tile.setIcon(Resources.UNCOVERED);
+			return;
+		}
+
+		tile.setIcon(tile.isFlagged() ? Resources.FLAG : Resources.TILE);
 	}
 }

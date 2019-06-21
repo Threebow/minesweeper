@@ -22,11 +22,17 @@ class Tile extends JButton {
 	int x;
 	int y;
 
+	boolean isFlagged() {
+		return flagged;
+	}
+
 	//Constructor, sets the parent board and the tile's position in it
 	Tile(Board parent, int posX, int posY) {
 		board = parent;
 		x = posX;
 		y = posY;
+
+		setBorderPainted(false);
 
 		//Set this button up
 		addMouseListener(new MouseInputHandler());
@@ -60,9 +66,12 @@ class Tile extends JButton {
 		exposed = true;
 
 		//Clear the icon and let the number show
-		setIcon(null);
+		setIcon(Resources.UNCOVERED);
 		int display = getDisplayNumber();
 		setText(display > 0 ? Integer.toString(display) : "");
+
+		setHorizontalTextPosition(JButton.CENTER);
+		setVerticalTextPosition(JButton.CENTER);
 
 		//Increment the uncovered amount of mines and check for a win
 		board.uncovered++;
