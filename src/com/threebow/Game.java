@@ -1,5 +1,6 @@
 package com.threebow;
 
+import javax.swing.*;
 import java.awt.*;
 
 class Game {
@@ -24,5 +25,7 @@ class Game {
 		board.exposeAllMines();
 		board.toolbar.timer.stop();
 		board.gameOver = true;
+
+		JOptionPane.showMessageDialog(board, "You lost!");
 	}
 }

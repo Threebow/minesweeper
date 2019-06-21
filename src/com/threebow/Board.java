@@ -166,9 +166,14 @@ class Board extends JFrame {
 				}
 			}
 
+			//Reset everything
 			gameOver = true;
 			flagCount = mines;
+			toolbar.setMineCount(0);
 			toolbar.timer.stop();
+
+			//Tell them they win
+			JOptionPane.showMessageDialog(this, "You win!");
 		}
 	}
 }
