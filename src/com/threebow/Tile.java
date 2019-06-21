@@ -14,7 +14,7 @@ class Tile extends JButton {
 
 	//Tile info
 	boolean mine = false;
-	boolean flagged = false;
+	private boolean flagged = false;
 	boolean exposed = false;
 	private int surroundingMineCount = -1;
 
